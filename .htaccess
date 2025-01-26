@@ -1,0 +1,20 @@
+
+RewriteEngine On
+RewriteBase /
+
+# หากเป็น /admin ส่งไปที่ /manage.php
+RewriteRule ^zenx$ /manage.php [L]
+RewriteRule ^pic$ /pic.php [L]
+RewriteEngine On
+
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+Options -Indexes
+
+# หากไม่ตรงกับ /admin และไม่ใช่ไฟล์หรือโฟลเดอร์ที่มีอยู่ ส่งไปที่ /404.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /404.php [L]
